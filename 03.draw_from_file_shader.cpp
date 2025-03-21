@@ -1,14 +1,16 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
-
-#define numVAOs 1
+#include <string>
+#include <fstream>
 
 using namespace std;
-GLuint renderingProgram;
-GLuint vao[numVAOs];
+#define numVAOs3 1
 
-void printShaderLog(GLuint shader) {
+GLuint reanderingProgram3;
+GLuint vao3[numVAOs3];
+
+void printShaderLog3(GLuint shader) {
 	char* log;
 	int len = 0;
 	int chWrittn = 0;
@@ -21,7 +23,7 @@ void printShaderLog(GLuint shader) {
 	}
 }
 
-void printProgramLog(int prog) {
+void printProgramLog3(int prog) {
 	char* log;
 	int len = 0;
 	int chWrittn = 0;
@@ -34,7 +36,7 @@ void printProgramLog(int prog) {
 	}
 }
 
-bool checkOpenGLError() {
+bool checkOpenGLError3() {
 	bool foundError = false;
 	int glErr = glGetError();
 	while (glErr != GL_NO_ERROR) {
@@ -44,88 +46,90 @@ bool checkOpenGLError() {
 	return foundError;
 }
 
-GLuint createShaderProgram() {
+
+string readFile(const char* filePath) {
+	string content;
+	ifstream fileStream(filePath, ios::in);
+	string line = "";
+	while (!fileStream.eof()) {
+		getline(fileStream, line);
+		content.append(line + "\n");
+	}
+	fileStream.close();
+	return content;
+}
+
+GLuint createShaderProgram3() {
 	GLint vertCompiled;
 	GLint fragCompiled;
 	GLint linked;
-	const char* vshaderScource =
-		"#version 430    \n"
-		"void main(void) \n"
-		"{ gl_Position = vec4(0.0, 0.0, 0.0, 1.0); }";
-
-	const char* fshaderSource =
-		"#version 430 \n"
-		"out vec4 color; \n"
-		"void main(void) \n"
-		"{color = vec4(1.0,0.3,0.4,0.0);} ";
 
 	GLuint vShader = glCreateShader(GL_VERTEX_SHADER);
 	GLuint fShader = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(vShader, 1, &vshaderScource, NULL);
-	glShaderSource(fShader, 1, &fshaderSource, NULL);
+	GLuint vfprogram = glCreateProgram();
+
+	string vertexShaderStr = readFile("vertexShader.vs");
+	string fragmentShaderStr = readFile("fragShader.fs");
+	const char* verShaderSrc = vertexShaderStr.c_str();
+	const char* fragShaderSrc = fragmentShaderStr.c_str();
+	glShaderSource(vShader, 1, &verShaderSrc, NULL);
+	glShaderSource(fShader, 1, &fragShaderSrc, NULL);
 	glCompileShader(vShader);
-	checkOpenGLError();
+	checkOpenGLError3();
 	glGetShaderiv(vShader, GL_COMPILE_STATUS, &vertCompiled);
 	if (vertCompiled != 1) {
 		cout << "vertex compilation failed" << endl;
-		printShaderLog(vShader);
+		printShaderLog3(vShader);
 	}
 
+
 	glCompileShader(fShader);
-	checkOpenGLError();
+	checkOpenGLError3();
 	glGetShaderiv(fShader, GL_COMPILE_STATUS, &fragCompiled);
 	if (fragCompiled != 1) {
 		cout << "fragment compilation failed" << endl;
-		printShaderLog(fShader);
+		printShaderLog3(fShader);
 	}
 
-	GLuint vfprogram = glCreateProgram();
 	glAttachShader(vfprogram, vShader);
 	glAttachShader(vfprogram, fShader);
 	glLinkProgram(vfprogram);
-	checkOpenGLError();
+	checkOpenGLError3();
 	glGetProgramiv(vfprogram, GL_LINK_STATUS, &linked);
 	if (linked != 1) {
 		cout << "linking failed" << endl;
-		printProgramLog(vfprogram);
+		printProgramLog3(vfprogram);
 	}
-
 	return vfprogram;
 }
 
-void init2(GLFWwindow* window) {
-	renderingProgram = createShaderProgram();
-	glGenVertexArrays(numVAOs, vao);
-	glBindVertexArray(vao[0]);
+void init3(GLFWwindow* window) {
+	reanderingProgram3 = createShaderProgram3();
+	glGenVertexArrays(numVAOs3, vao3);
+	glBindVertexArray(vao3[0]);
 }
 
-void display2(GLFWwindow* window, double currentTime) {
-	glUseProgram(renderingProgram);
+void display3(GLFWwindow* window, double currentTime) {
+	glUseProgram(reanderingProgram3);
 	glPointSize(30.0f);
 	glDrawArrays(GL_POINTS, 0, 1);
 }
 
-int main2(void) {
+int main(void) {
 	if (!glfwInit()) {
 		exit(EXIT_FAILURE);
 	}
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-	GLFWwindow* window = glfwCreateWindow(600, 600, "rzm window", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(600, 600, "rzm title", NULL, NULL);
 	glfwMakeContextCurrent(window);
 	if (glewInit() != GLEW_OK) {
 		exit(EXIT_FAILURE);
 	}
-	/*
-	glfwSwapInterval 函数的参数是一个整数，其含义如下：
-	0：代表关闭垂直同步，这样显卡会以尽可能高的帧率进行渲染，也许会引发画面撕裂的情况。
-	1：表示开启垂直同步，显卡会与显示器的刷新率同步，以此防止画面撕裂，不过可能会造成帧率的轻微下降。
-	2：意味着开启双重缓冲垂直同步，显卡会在显示器刷新两次之后再进行一次交换缓冲，这可能会使帧率减半，但能保证画面的平滑。
-	*/
 	glfwSwapInterval(1);
-	init2(window);
+	init3(window);
 	while (!glfwWindowShouldClose(window)) {
-		display2(window, glfwGetTime());
+		display3(window, glfwGetTime());
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
