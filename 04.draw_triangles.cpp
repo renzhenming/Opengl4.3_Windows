@@ -2,15 +2,29 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include <string>
+#include <iostream>
 #include <fstream>
 
 using namespace std;
-#define numVAOs3 1
 
-GLuint reanderingProgram3;
-GLuint vao3[numVAOs3];
+#define numVAOs4 1
 
-void printShaderLog3(GLuint shader) {
+GLuint renderingProgram4;
+GLuint vao4[numVAOs4];
+
+string readFile4(const char* file) {
+	string content;
+	string line = "";
+	ifstream fileStream(file,ios::in);
+	while (!fileStream.eof()) {
+		getline(fileStream, line);
+		content.append(line + "\n");
+	}
+	fileStream.close();
+	return content;
+}
+
+void printShaderLog4(GLuint shader) {
 	char* log;
 	int len = 0;
 	int chWrittn = 0;
@@ -23,7 +37,7 @@ void printShaderLog3(GLuint shader) {
 	}
 }
 
-void printProgramLog3(int prog) {
+void printProgramLog4(int prog) {
 	char* log;
 	int len = 0;
 	int chWrittn = 0;
@@ -36,7 +50,7 @@ void printProgramLog3(int prog) {
 	}
 }
 
-bool checkOpenGLError3() {
+bool checkOpenGLError4() {
 	bool foundError = false;
 	int glErr = glGetError();
 	while (glErr != GL_NO_ERROR) {
@@ -47,19 +61,7 @@ bool checkOpenGLError3() {
 }
 
 
-string readFile(const char* filePath) {
-	string content;
-	ifstream fileStream(filePath, ios::in);
-	string line = "";
-	while (!fileStream.eof()) {
-		getline(fileStream, line);
-		content.append(line + "\n");
-	}
-	fileStream.close();
-	return content;
-}
-
-GLuint createShaderProgram3() {
+GLuint createShaderProgram4() {
 	GLint vertCompiled;
 	GLint fragCompiled;
 	GLint linked;
@@ -68,54 +70,54 @@ GLuint createShaderProgram3() {
 	GLuint fShader = glCreateShader(GL_FRAGMENT_SHADER);
 	GLuint vfprogram = glCreateProgram();
 
-	string vertexShaderStr = readFile("vertexShader.vs");
-	string fragmentShaderStr = readFile("fragShader.fs");
+	string vertexShaderStr = readFile4("vertexShader.triangle");
+	string fragmentShaderStr = readFile4("fragShader.triangle");
 	const char* verShaderSrc = vertexShaderStr.c_str();
 	const char* fragShaderSrc = fragmentShaderStr.c_str();
 	glShaderSource(vShader, 1, &verShaderSrc, NULL);
 	glShaderSource(fShader, 1, &fragShaderSrc, NULL);
 	glCompileShader(vShader);
-	checkOpenGLError3();
+	checkOpenGLError4();
 	glGetShaderiv(vShader, GL_COMPILE_STATUS, &vertCompiled);
 	if (vertCompiled != 1) {
 		cout << "vertex compilation failed" << endl;
-		printShaderLog3(vShader);
+		printShaderLog4(vShader);
 	}
 
 
 	glCompileShader(fShader);
-	checkOpenGLError3();
+	checkOpenGLError4();
 	glGetShaderiv(fShader, GL_COMPILE_STATUS, &fragCompiled);
 	if (fragCompiled != 1) {
 		cout << "fragment compilation failed" << endl;
-		printShaderLog3(fShader);
+		printShaderLog4(fShader);
 	}
 
 	glAttachShader(vfprogram, vShader);
 	glAttachShader(vfprogram, fShader);
 	glLinkProgram(vfprogram);
-	checkOpenGLError3();
+	checkOpenGLError4();
 	glGetProgramiv(vfprogram, GL_LINK_STATUS, &linked);
 	if (linked != 1) {
 		cout << "linking failed" << endl;
-		printProgramLog3(vfprogram);
+		printProgramLog4(vfprogram);
 	}
 	return vfprogram;
 }
 
-void init3(GLFWwindow* window) {
-	reanderingProgram3 = createShaderProgram3();
-	glGenVertexArrays(numVAOs3, vao3);
-	glBindVertexArray(vao3[0]);
-}
-
-void display3(GLFWwindow* window, double currentTime) {
-	glUseProgram(reanderingProgram3);
+void display4(GLFWwindow* window, double currentTime) {
+	glUseProgram(renderingProgram4);
 	glPointSize(30.0f);
-	glDrawArrays(GL_POINTS, 0, 1);
+	glDrawArrays(GL_TRIANGLES, 0, 3);
 }
 
-int main3(void) {
+void init4(GLFWwindow* window) {
+	renderingProgram4 = createShaderProgram4();
+	glGenVertexArrays(numVAOs4, vao4);
+	glBindVertexArray(vao4[0]);
+}
+
+int main(void) {
 	if (!glfwInit()) {
 		exit(EXIT_FAILURE);
 	}
@@ -127,9 +129,10 @@ int main3(void) {
 		exit(EXIT_FAILURE);
 	}
 	glfwSwapInterval(1);
-	init3(window);
+	init4(window);
+
 	while (!glfwWindowShouldClose(window)) {
-		display3(window, glfwGetTime());
+		display4(window, glfwGetTime());
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}

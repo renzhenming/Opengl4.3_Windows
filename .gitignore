@@ -1,0 +1,24 @@
+﻿################################################################################
+# 此 .gitignore 文件已由 Microsoft(R) Visual Studio 自动创建。
+################################################################################
+
+/OpenGlProject.vcxproj
+/OpenGlProject.vcxproj.filters
+/x64/Debug/OpenGlProject.exe
+/x64/Debug/OpenGlProject.pdb
+/OpenGlProject/x64/Debug/OpenGlProject.tlog/CL.command.1.tlog
+/OpenGlProject/x64/Debug/OpenGlProject.tlog/Cl.items.tlog
+/OpenGlProject/x64/Debug/OpenGlProject.tlog/CL.read.1.tlog
+/OpenGlProject/x64/Debug/OpenGlProject.tlog/CL.write.1.tlog
+/OpenGlProject/x64/Debug/OpenGlProject.tlog/link.command.1.tlog
+/OpenGlProject/x64/Debug/OpenGlProject.tlog/link.read.1.tlog
+/OpenGlProject/x64/Debug/OpenGlProject.tlog/link.secondary.1.tlog
+/OpenGlProject/x64/Debug/OpenGlProject.tlog/link.write.1.tlog
+/OpenGlProject/x64/Debug/01.draw_backgroud.obj
+/OpenGlProject/x64/Debug/02.draw_point.obj
+/OpenGlProject/x64/Debug/03.draw_from_file_shader.obj
+/OpenGlProject/x64/Debug/04.draw_triangles.obj
+/OpenGlProject/x64/Debug/OpenGlProject.ilk
+/OpenGlProject/x64/Debug/OpenGlProject.log
+/OpenGlProject/x64/Debug/vc143.idb
+/OpenGlProject/x64/Debug/vc143.pdb
