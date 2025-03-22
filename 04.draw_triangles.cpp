@@ -117,7 +117,7 @@ void init4(GLFWwindow* window) {
 	glBindVertexArray(vao4[0]);
 }
 
-int main(void) {
+int main4(void) {
 	if (!glfwInit()) {
 		exit(EXIT_FAILURE);
 	}
