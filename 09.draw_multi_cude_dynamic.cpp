@@ -98,7 +98,7 @@ void display9(GLFWwindow* window, double currentTime) {
 
 }
 
-int main(void) {
+int main9(void) {
 	if (!glfwInit()) {
 		exit(EXIT_FAILURE);
 	}
