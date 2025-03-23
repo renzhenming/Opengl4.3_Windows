@@ -39,7 +39,7 @@ void display5(GLFWwindow* window, double currentTime) {
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 }
 
-int main() {
+int main5() {
 	if (!glfwInit()) {
 		exit(EXIT_FAILURE);
 	}
