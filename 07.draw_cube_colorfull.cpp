@@ -89,7 +89,7 @@ void display7(GLFWwindow* window, double currentTime) {
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 }
 
-int main(void) {
+int main7(void) {
 	if (!glfwInit()) {
 		exit(EXIT_FAILURE);
 	}
