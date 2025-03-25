@@ -123,7 +123,7 @@ void display11(GLFWwindow* window, double currentTime) {
 	glDrawArrays(GL_TRIANGLES, 0, 18);
 }
 
-int main(void) {
+int main11(void) {
 	if (!glfwInit()) { exit(EXIT_FAILURE); }
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
