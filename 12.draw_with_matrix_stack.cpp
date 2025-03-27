@@ -142,7 +142,7 @@ void window_size_callback12(GLFWwindow* win, int newWidth, int newHeight) {
 }
 
 
-int main(void) {
+int main12(void) {
 	if (!glfwInit()) {
 		exit(EXIT_FAILURE);
 	}
