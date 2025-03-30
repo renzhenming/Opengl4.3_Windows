@@ -134,7 +134,7 @@ void display14(GLFWwindow* window, double currentTime) {
 	glDrawArrays(GL_TRIANGLES, 0, mySphere.getNumIndices());
 }
 
-int main(void) {
+int main14(void) {
 	if (!glfwInit()) {
 		exit(EXIT_FAILURE);
 	}
