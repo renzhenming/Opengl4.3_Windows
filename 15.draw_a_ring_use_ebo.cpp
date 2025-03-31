@@ -10,8 +10,6 @@
 #include "Utils.h"
 using namespace std;
 
-float toRadians(float degrees) { return (degrees * 2.0f * 3.14159f) / 360.0f; }
-
 #define numVAOs15 1
 #define numVBOs15 4
 
@@ -104,8 +102,8 @@ void display15(GLFWwindow* window, double currentTime) {
 
 	vMat15 = glm::translate(glm::mat4(1.0f), glm::vec3(-cameraX15, -cameraY15, -cameraZ15));
 	mMat15 = glm::translate(glm::mat4(1.0f), glm::vec3(torLocX15, torLocY15, torLocZ15));
-	//mMat *= glm::eulerAngleXYZ(toRadians(30.0f), 0.0f, 0.0f);
-	mMat15 = glm::rotate(mMat15, toRadians(30.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+	//mMat *= glm::eulerAngleXYZ( glm::radians(30.0f), 0.0f, 0.0f);
+	mMat15 = glm::rotate(mMat15, glm::radians(30.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 
 	mvMat15 = vMat15 * mMat15;
 
@@ -131,7 +129,7 @@ void display15(GLFWwindow* window, double currentTime) {
 	glDrawElements(GL_TRIANGLES, myTorus.getIndices().size(), GL_UNSIGNED_INT, 0);
 }
 
-int main(void) {
+int main15(void) {
 	if (!glfwInit()) { exit(EXIT_FAILURE); }
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
