@@ -124,7 +124,7 @@ void display16(GLFWwindow* window, double currentTime) {
 }
 
 
-int main(void) {
+int main16(void) {
 	if (!glfwInit()) { exit(EXIT_FAILURE); }
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
