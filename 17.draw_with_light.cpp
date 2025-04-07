@@ -23,7 +23,7 @@ int numTorusVertices17 = myTorus17.getNumVertices();
 int numTorusIndices17 = myTorus17.getNumIndices();
 
 
-glm::vec3 initialLightLoc17 = glm::vec3(5.0f, 2.0f, 2.0f);
+glm::vec3 initialLightLoc17 = glm::vec3(10.0f, 0.0f, 2.0f);
 float amt = 0.0f;
 
 GLuint mvLoc17, projLoc17, nLoc17;
@@ -113,7 +113,10 @@ void setupVertex17() {
 }
 
 void init17(GLFWwindow* window) {
-	renderingProgram17 = Utils::createShaderProgram("vertexShader.light_gouraud", "fragShader.light_gouraud");
+	//切换不同的光照模型
+	renderingProgram17 = Utils::createShaderProgram("vertexShader.light_blinn_phong", "fragShader.light_blinn_phong");
+	//renderingProgram17 = Utils::createShaderProgram("vertexShader.light_phong", "fragShader.light_phong");
+	//renderingProgram17 = Utils::createShaderProgram("vertexShader.light_gouraud", "fragShader.light_gouraud");
 	cameraX17 = 0.0f;
 	cameraY17 = 0.0f;
 	cameraZ17 = 1.0f;
