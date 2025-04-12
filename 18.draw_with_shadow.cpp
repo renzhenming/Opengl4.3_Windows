@@ -373,7 +373,6 @@ void window_size_callback18(GLFWwindow* window, int width, int height) {
 }
 
 int main(void) {
-	std::cout<<"main start" << std::endl;
 	if (!glfwInit()) {
 		exit(EXIT_FAILURE);
 	}

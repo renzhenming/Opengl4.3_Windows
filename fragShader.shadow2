@@ -17,10 +17,6 @@ struct Material
 uniform vec4 globalAmbient;
 uniform PositionalLight light;
 uniform Material material;
-uniform mat4 mv_matrix; 
-uniform mat4 proj_matrix;
-uniform mat4 norm_matrix;
-uniform mat4 shadowMVP;
 layout (binding=0) uniform sampler2DShadow shadowTex;
 
 void main(void)
@@ -35,7 +31,8 @@ void main(void)
 				+ light.ambient * material.ambient;
 
 	if (inShadow != 0.0)
-	{	fragColor += light.diffuse * material.diffuse * max(dot(L,N),0.0)
+	{	
+		fragColor += light.diffuse * material.diffuse * max(dot(L,N),0.0)
 			+ light.specular * material.specular
 			* pow(max(dot(H,N),0.0),material.shininess*3.0);
 	}
