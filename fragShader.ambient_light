@@ -1,0 +1,12 @@
+#version 430
+uniform vec4 lightColor;
+uniform vec4 objectColor;
+
+const float ambientStrength = 0.1;
+out vec4 FragColor;
+
+void main() {
+    vec4 ambient = ambientStrength * lightColor;
+
+    FragColor = ambient * objectColor;
+}

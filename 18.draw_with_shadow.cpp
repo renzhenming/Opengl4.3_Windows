@@ -372,7 +372,7 @@ void window_size_callback18(GLFWwindow* window, int width, int height) {
 	pMat18 = glm::perspective(glm::radians(60.0f), aspect18, 0.1f, 1000.0f);
 }
 
-int main(void) {
+int main18(void) {
 	if (!glfwInit()) {
 		exit(EXIT_FAILURE);
 	}

@@ -24,7 +24,6 @@ int numTorusIndices17 = myTorus17.getNumIndices();
 
 
 glm::vec3 initialLightLoc17 = glm::vec3(10.0f, 0.0f, 2.0f);
-float amt = 0.0f;
 
 GLuint mvLoc17, projLoc17, nLoc17;
 GLuint globalAmbLoc17, ambLoc17, diffLoc17, specLoc17, posLoc17, mambLoc17, mdiffLoc17, mspecLoc17, mshiLoc17;
