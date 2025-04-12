@@ -175,7 +175,7 @@ void display17(GLFWwindow* window, double currentTime) {
 	glDrawElements(GL_TRIANGLES, numTorusIndices17, GL_UNSIGNED_INT, 0);
 }
 
-int main(void) {
+int main17(void) {
 	if (!glfwInit()) {
 		exit(EXIT_FAILURE);
 	}
