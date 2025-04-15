@@ -56,7 +56,7 @@ void init10(GLFWwindow* window) {
 	setupVertices10();
 }
 
-void window_size_callback(GLFWwindow* window, int width, int height) {
+void window_size_callback10(GLFWwindow* window, int width, int height) {
 	aspect10 = (float)width / (float)height;
 	glViewport(0, 0, width, height);
 	pMat10 = glm::perspective(glm::radians(60.0f), aspect10, 0.1f, 1000.0f);
@@ -101,7 +101,7 @@ int main10(void) {
 		exit(EXIT_FAILURE);
 	}
 	glfwSwapInterval(1);
-	glfwSetWindowSizeCallback(window, window_size_callback);
+	glfwSetWindowSizeCallback(window, window_size_callback10);
 	init10(window);
 	while (!glfwWindowShouldClose(window)) {
 		display10(window, glfwGetTime());

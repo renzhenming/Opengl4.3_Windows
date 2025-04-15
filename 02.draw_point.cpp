@@ -2,11 +2,11 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 
-#define numVAOs 1
+#define numVAOs2 1
 
 using namespace std;
-GLuint renderingProgram;
-GLuint vao[numVAOs];
+GLuint renderingProgram2;
+GLuint vao2[numVAOs2];
 
 void printShaderLog(GLuint shader) {
 	char* log;
@@ -94,13 +94,13 @@ GLuint createShaderProgram() {
 }
 
 void init2(GLFWwindow* window) {
-	renderingProgram = createShaderProgram();
-	glGenVertexArrays(numVAOs, vao);
-	glBindVertexArray(vao[0]);
+	renderingProgram2 = createShaderProgram();
+	glGenVertexArrays(numVAOs2, vao2);
+	glBindVertexArray(vao2[0]);
 }
 
 void display2(GLFWwindow* window, double currentTime) {
-	glUseProgram(renderingProgram);
+	glUseProgram(renderingProgram2);
 	glPointSize(30.0f);
 	glDrawArrays(GL_POINTS, 0, 1);
 }

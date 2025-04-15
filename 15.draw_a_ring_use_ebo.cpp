@@ -27,19 +27,19 @@ int width15, height15;
 float aspect15;
 glm::mat4 pMat15, vMat15, mMat15, mvMat15;
 
-Torus myTorus(0.5f, 0.2f, 48);
+Torus myTorus15(0.5f, 0.2f, 48);
 
 void setupVertices15(void) {
-	std::vector<int> ind = myTorus.getIndices();
-	std::vector<glm::vec3> vert = myTorus.getVertices();
-	std::vector<glm::vec2> tex = myTorus.getTexCoords();
-	std::vector<glm::vec3> norm = myTorus.getNormals();
+	std::vector<int> ind = myTorus15.getIndices();
+	std::vector<glm::vec3> vert = myTorus15.getVertices();
+	std::vector<glm::vec2> tex = myTorus15.getTexCoords();
+	std::vector<glm::vec3> norm = myTorus15.getNormals();
 
 	std::vector<float> pvalues;
 	std::vector<float> tvalues;
 	std::vector<float> nvalues;
 
-	for (int i = 0; i < myTorus.getNumVertices(); i++) {
+	for (int i = 0; i < myTorus15.getNumVertices(); i++) {
 		pvalues.push_back(vert[i].x);
 		pvalues.push_back(vert[i].y);
 		pvalues.push_back(vert[i].z);
@@ -126,7 +126,7 @@ void display15(GLFWwindow* window, double currentTime) {
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbo15[3]);
-	glDrawElements(GL_TRIANGLES, myTorus.getIndices().size(), GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, myTorus15.getIndices().size(), GL_UNSIGNED_INT, 0);
 }
 
 int main15(void) {
