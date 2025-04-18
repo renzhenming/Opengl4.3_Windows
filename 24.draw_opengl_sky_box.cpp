@@ -90,7 +90,7 @@ void setupVertices24(void) {
 void display24(GLFWwindow* window, double currentTime) {
 	glClear(GL_DEPTH_BUFFER_BIT);
 	glClear(GL_COLOR_BUFFER_BIT);
-	vMat24 = glm::translate(glm::mat4(1.0f), glm::vec3(-cameraX24, -cameraY24, -cameraZ24));
+	vMat24 = glm::translate(glm::mat4(1.0f), glm::vec3(-cameraX24, -cameraY24, -currentTime*cameraZ24));
 
 	// draw cube map
 	glUseProgram(renderingProgramCubeMap24);
