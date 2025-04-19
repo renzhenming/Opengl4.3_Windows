@@ -1,0 +1,22 @@
+#version 430
+
+layout(location = 0) in vec3 position;
+layout(location = 1) in vec3 normal;
+
+out vec3 vNormal;
+out vec3 vVertPos;
+
+uniform mat4 mv_matrix;
+uniform mat4 proj_matrix;
+uniform mat4 norm_matrix;
+
+layout(binding  = 0) uniform samplerCube t;
+
+void main(void){
+	//将顶点位置乘以模型视图矩阵，得到顶点在视图空间中的位置，并将结果存储在 vVertPos 中。
+	vVertPos = (mv_matrix * vec4(position, 1.0)).xyz;
+	//将法线向量乘以法线矩阵，得到变换后的法线向量，并将结果存储在 vNormal 中。
+	vNormal = (norm_matrix * vec4(normal, 1.0)).xyz;
+	//将顶点位置先乘以模型视图矩阵，再乘以投影矩阵，得到顶点在裁剪空间中的位置，并将结果赋值给 gl_Position，这是顶点着色器的必需输出。
+	gl_Position = proj_matrix * mv_matrix * vec4(position, 1.0);
+}

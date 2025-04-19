@@ -1,0 +1,22 @@
+#version 430
+
+in vec3 vNormal;
+in vec3 vVertPos;
+out vec4 fragColor;
+
+uniform mat4 mv_matrix;
+uniform mat4 proj_matrix;
+uniform mat4 norm_matrix;
+
+layout(binding = 0) uniform samplerCube t;
+
+void main(void){
+	//由于 vVertPos 代表顶点在视图空间中的位置，那么 -vVertPos 就表示从顶点指向相机的向量。因为向量的表示是从终点坐标减去起点坐标，在视图空间中，起点是顶点位置 vVertPos，
+	//终点是相机位置 (0, 0, 0)，所以从顶点指向相机的向量就是 (0, 0, 0) - vVertPos = -vVertPos。
+	//归一化（Normalization）是把向量的长度（模）变为 1 的操作，得到的向量被称作单位向量
+	//将法线向量进行归一化处理。
+	//计算反射向量，这里取负号是因为 reflect 函数返回的是反射光线的方向，而我们需要的是反射光线射向相机的方向。
+	vec3 r = -reflect(normalize(-vVertPos),normalize(vNormal));
+	//使用计算得到的反射向量 r 对立方体贴图 t 进行采样，得到反射的颜色，并将其赋值给 fragColor，作为该片段的最终颜色。
+	fragColor = texture(t,r);
+}

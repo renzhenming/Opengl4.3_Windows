@@ -47,13 +47,15 @@ string Utils::readShaderFile(const char* filePath) {
 	return content;
 }
 
-bool Utils::checkOpenGLError()
+bool Utils::checkOpenGLError(int tag)
 {
 	bool foundError = false;
 	int glErr = glGetError();
 	while (glErr != GL_NO_ERROR)
 	{
+		cout << "glError tag: " << tag << endl;
 		cout << "glError: " << glErr << endl;
+		cout << "glError tag: " << tag << endl;
 		foundError = true;
 		glErr = glGetError();
 	}

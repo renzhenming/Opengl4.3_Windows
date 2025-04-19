@@ -21,7 +21,7 @@ private:
 public:
 	Utils();
 	static void displayComputeShaderLimits();
-	static bool checkOpenGLError();
+	static bool checkOpenGLError(int tag = 0);
 	static GLuint createShaderProgram(const char* cp);
 	static GLuint createShaderProgram(const char* vp, const char* fp);
 	static GLuint createShaderProgram(const char* vp, const char* gp, const char* fp);
