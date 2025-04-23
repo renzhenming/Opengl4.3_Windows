@@ -29,22 +29,22 @@ int width14, height14;
 float aspect14;
 glm::mat4 pMat14, vMat14, mMat14, mvMat14;
 
-Sphere mySphere = Sphere(48);
+Sphere mySphere14 = Sphere(48);
 
 /*
 注意这里并没有使用索引缓冲区，所以顶点的顺序根据索引重新进行了排列
 */
 void setupVertices14(void) {
-	std::vector<int> ind = mySphere.getIndices();
-	std::vector<glm::vec3> vert = mySphere.getVertices();
-	std::vector<glm::vec2> tex = mySphere.getTexCoords();
-	std::vector<glm::vec3> norm = mySphere.getNormals();
+	std::vector<int> ind = mySphere14.getIndices();
+	std::vector<glm::vec3> vert = mySphere14.getVertices();
+	std::vector<glm::vec2> tex = mySphere14.getTexCoords();
+	std::vector<glm::vec3> norm = mySphere14.getNormals();
 
 	std::vector<float> pvalues;
 	std::vector<float> tvalues;
 	std::vector<float> nvalues;
 
-	int numIndices = mySphere.getNumIndices();
+	int numIndices = mySphere14.getNumIndices();
 	for (int i = 0; i < numIndices; i++) {
 		pvalues.push_back((vert[ind[i]]).x);
 		pvalues.push_back((vert[ind[i]]).y);
@@ -131,7 +131,7 @@ void display14(GLFWwindow* window, double currentTime) {
 	glFrontFace(GL_CCW);
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
-	glDrawArrays(GL_TRIANGLES, 0, mySphere.getNumIndices());
+	glDrawArrays(GL_TRIANGLES, 0, mySphere14.getNumIndices());
 }
 
 int main14(void) {
